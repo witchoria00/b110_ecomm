@@ -1,5 +1,11 @@
 <?php 
-
+// login from buttom name 
+if(isset($_POST['login'])) // $_POST is super global array
+    {
+       $email = $_POST['email'];  // retrieve email value of user 
+       $password = $_POST['password']; //retrieve password of user
+        // echo "email is $email and password is $password."; (debugging)
+}
 ?>
 
 <!DOCTYPE html>
