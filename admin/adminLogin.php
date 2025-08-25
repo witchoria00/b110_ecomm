@@ -1,5 +1,9 @@
 <?php 
 // login from button name 
+if(!isset($_SESSION)) 
+{
+    session_start(); // start session
+}
 require_once "dbconnect.php";
 
 if(isset($_POST['login'])) // $_POST is super global array
@@ -19,7 +23,10 @@ if(isset($_POST['login'])) // $_POST is super global array
     {
         if(password_verify($password, $adminInfo['password'])) // checks password and hash match
         {
-            echo "login success!!";
+            // echo "login success!!";
+            $_SESSION['loginSuccess'] = true; // store admin id in session
+            $_SESSION['email'] = $email; // store email in session
+
         }
         else
         {
@@ -51,7 +58,7 @@ if(isset($_POST['login'])) // $_POST is super global array
         </div>
         <div class="row">
             <div class="col-md-6 mx-auto py-5">
-                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" class="form">
                     <?php 
                     if(isset($errorMessage)){
                         echo "<p class='alert alert-danger'>$errorMessage</p>";
